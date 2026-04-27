@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arpita Dey— Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- ============================================================
+       FONTS — Change or keep as desired
+  ============================================================ -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       CUSTOM CURSOR
+  ============================================================ -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-trail" id="cursorTrail"></div>
+
+  <!-- ============================================================
+       LOADER
+  ============================================================ -->
+  <div class="loader" id="loader">
+    <div class="loader-inner">
+      <span class="loader-text">Loading</span>
+      <div class="loader-bar"><div class="loader-fill"></div></div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       NAVIGATION
+  ============================================================ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">
+      <!-- ✏️ CHANGE: Your initials or logo text -->
+      <span class="logo-text">AR<span class="logo-dot">.</span></span>
+    </div>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home" class="nav-link active" data-section="home"><span class="nav-num">01</span>Home</a></li>
+      <li><a href="#about" class="nav-link" data-section="about"><span class="nav-num">02</span>About</a></li>
+      <li><a href="#skills" class="nav-link" data-section="skills"><span class="nav-num">03</span>Skills</a></li>
+      <li><a href="#experience" class="nav-link" data-section="experience"><span class="nav-num">04</span>Experience</a></li>
+      <li><a href="#projects" class="nav-link" data-section="projects"><span class="nav-num">05</span>Projects</a></li>
+      <li><a href="#education" class="nav-link" data-section="education"><span class="nav-num">06</span>Education</a></li>
+      <li><a href="#certificates" class="nav-link" data-section="certificates"><span class="nav-num">07</span>Certificates</a></li>
+      <li><a href="#learning" class="nav-link" data-section="learning"><span class="nav-num">08</span>Learning</a></li>
+      <li><a href="#livework" class="nav-link" data-section="livework"><span class="nav-num">09</span>Live Work</a></li>
+      <li><a href="#resume" class="nav-link" data-section="resume"><span class="nav-num">10</span>Resume</a></li>
+      <li><a href="#contact" class="nav-link" data-section="contact"><span class="nav-num">11</span>Contact</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <!-- Theme Toggle -->
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="toggle-track">
+          <span class="toggle-thumb">
+            <i class="fas fa-sun sun-icon"></i>
+            <i class="fas fa-moon moon-icon"></i>
+          </span>
+        </span>
+      </button>
+
+      <!-- Unique Hamburger -->
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <div class="ham-box">
+          <span class="ham-line line-1"></span>
+          <span class="ham-line line-2"></span>
+          <span class="ham-line line-3"></span>
+          <span class="ham-label">MENU</span>
+        </div>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       MOBILE MENU OVERLAY
+  ============================================================ -->
+  <div class="mobile-overlay" id="mobileOverlay">
+    <div class="mobile-menu">
+      <ul class="mobile-nav-links">
+        <li><a href="#home" class="mob-link" data-section="home"><em>01</em> Home</a></li>
+        <li><a href="#about" class="mob-link" data-section="about"><em>02</em> About</a></li>
+        <li><a href="#skills" class="mob-link" data-section="skills"><em>03</em> Skills</a></li>
+        <li><a href="#experience" class="mob-link" data-section="experience"><em>04</em> Experience</a></li>
+        <li><a href="#projects" class="mob-link" data-section="projects"><em>05</em> Projects</a></li>
+        <li><a href="#education" class="mob-link" data-section="education"><em>06</em> Education</a></li>
+        <li><a href="#certificates" class="mob-link" data-section="certificates"><em>07</em> Certificates</a></li>
+        <li><a href="#learning" class="mob-link" data-section="learning"><em>08</em> Learning</a></li>
+        <li><a href="#livework" class="mob-link" data-section="livework"><em>09</em> Live Work</a></li>
+        <li><a href="#resume" class="mob-link" data-section="resume"><em>10</em> Resume</a></li>
+        <li><a href="#contact" class="mob-link" data-section="contact"><em>11</em> Contact</a></li>
+      </ul>
+      <!-- ✏️ CHANGE: Your social links -->
+      <div class="mobile-socials">
+        <a href="https://github.com/Arpita301" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/arpita-dey-b0b706344/" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.instagram.com/arpitadey1918?igsh=MTUwZXFvajVwYjJnYQ%3D%3D" target="_blank"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       DASHBOARD SIDEBAR (visible on wide screens)
+  ============================================================ -->
+  <aside class="dashboard-sidebar" id="dashSidebar">
+    <div class="sidebar-profile">
+      <!-- ✏️ CHANGE: Replace with your own photo URL or relative path -->
+      <div class="sidebar-avatar">
+        <img src="/images/photo2.png" alt="Profile Photo" class="avatar-img" id="profilePhoto" />
+        <div class="avatar-ring"></div>
+      </div>
+      <!-- ✏️ CHANGE: Your name and title -->
+      <p class="sidebar-name">Arpita Dey</p>
+      <p class="sidebar-role">Full-Stack Developer</p>
+      <div class="online-badge"><span class="dot-pulse"></span> Available for work</div>
+    </div>
+
+    <div class="sidebar-stats">
+      <!-- ✏️ CHANGE: Your stats -->
+     <div class="stat-item">
+    <span class="stat-num" data-target="4">0</span>
+    <span class="stat-label">Projects</span>
+  </div>
+
+  <div class="stat-item">
+    <span class="stat-num" data-target="1">0</span>
+    <span class="stat-label">Years Exp.</span>
+  </div>
+
+  <div class="stat-item">
+    <span class="stat-num" data-target="4">0</span>
+    <span class="stat-label">Certifications</span>
+  </div>
+    </div>
+
+    <div class="sidebar-nav">
+      <a href="#dashboard" class="dash-nav-item active"><i class="fas fa-th-large"></i><span>Dashboard</span></a>
+      <a href="#home" class="dash-nav-item"><i class="fas fa-house"></i><span>Home</span></a>
+      <a href="#about" class="dash-nav-item"><i class="fas fa-user"></i><span>About</span></a>
+      <a href="#skills" class="dash-nav-item"><i class="fas fa-code"></i><span>Skills</span></a>
+      <a href="#experience" class="dash-nav-item"><i class="fas fa-briefcase"></i><span>Experience</span></a>
+      <a href="#projects" class="dash-nav-item"><i class="fas fa-layer-group"></i><span>Projects</span></a>
+      <a href="#education" class="dash-nav-item"><i class="fas fa-graduation-cap"></i><span>Education</span></a>
+      <a href="#certificates" class="dash-nav-item"><i class="fas fa-certificate"></i><span>Certificates</span></a>
+      <a href="#learning" class="dash-nav-item"><i class="fas fa-book-open"></i><span>Learning</span></a>
+      <a href="#livework" class="dash-nav-item"><i class="fas fa-globe"></i><span>Live Work</span></a>
+      <a href="#resume" class="dash-nav-item"><i class="fas fa-file-alt"></i><span>Resume</span></a>
+      <a href="#contact" class="dash-nav-item"><i class="fas fa-envelope"></i><span>Contact</span></a>
+    </div>
+
+    <!-- ✏️ CHANGE: Your social links -->
+    <div class="sidebar-socials">
+      <a href="https://github.com/Arpita301" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/arpita-dey-b0b706344/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      <a href="https://www.instagram.com/arpitadey1918?igsh=MTUwZXFvajVwYjJnYQ%3D%3D" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.youtube.com/@arpitadey5893" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+    </div>
+  </aside>
+
+  <!-- ============================================================
+       MAIN CONTENT
+  ============================================================ -->
+  <main class="main-content" id="mainContent">
+
+    <!-- ========================================================
+         DASHBOARD SECTION
+    ======================================================== -->
+<section class="section dashboard-section" id="dashboard">
+  <div class="section-header">
+    <h2 class="section-title"><span class="title-accent">Dashboard</span></h2>
+    <p class="section-sub">Your at-a-glance portfolio overview</p>
+  </div>
+
+  <div class="dashboard-grid">
+
+    <!-- 👩‍💻 Hero Card -->
+    <div class="dash-card dash-card--hero">
+      <div class="dash-card-icon"><i class="fas fa-user-circle"></i></div>
+
+      <h3>Arpita Dey</h3>
+      <p>Full-Stack Developer · MERN Stack · Next.js · SQL · Basic Java Programmer</p>
+
+      <a href="#contact" class="btn btn--primary">Hire Me</a>
+    </div>
+
+    <!-- 📁 Projects -->
+    <div class="dash-card">
+      <div class="dash-card-icon"><i class="fas fa-layer-group"></i></div>
+      <h3 class="counter" data-target="4">4</h3>
+      <p>Total Projects</p>
+    </div>
+
+    <!-- 📜 Certifications -->
+    <div class="dash-card">
+      <div class="dash-card-icon"><i class="fas fa-certificate"></i></div>
+      <h3 class="counter" data-target="4">0</h3>
+      <p>Certifications</p>
+    </div>
+
+    <!-- 💼 Experience -->
+    <div class="dash-card">
+      <div class="dash-card-icon"><i class="fas fa-briefcase"></i></div>
+      <h3 class="counter" data-target="1">0</h3>
+      <p>Years Experience</p>
+    </div>
+
+    <!-- 💡 Skills -->
+    <div class="dash-card dash-card--skills-preview">
+      <div class="dash-card-icon"><i class="fas fa-code"></i></div>
+      <h4>Top Skills</h4>
+
+      <div class="skill-chips">
+      <span>HTML</span>
+      <span>CSS</span>
+      <span>Tailwind</span>
+      <span>JavaScript</span>
+      <span>React</span>
+      <span>Next.js</span>
+      <span>Node.js</span>
+      <span>Express.js</span>
+      <span>MongoDB</span>
+      <span>SQL</span>
+      <span>Git & Github</span>
+      <span>Basic DSA</span>
+      <span>Basic Java</span>
+    </div>
+    </div>
+
+    <!-- 📍 Status -->
+    <div class="dash-card dash-card--status">
+      <div class="dash-card-icon"><i class="fas fa-map-marker-alt"></i></div>
+      <h4>Current Status</h4>
+
+      <p><i class="fas fa-location-dot"></i>Chinsurah , Hooghly , West Bengal, India</p>
+      <p><i class="fas fa-circle-check"></i> Open to Jobs & Internships</p>
+      <p><i class="fas fa-clock"></i> IST (UTC+5:30)</p>
+    </div>
+
+  </div>
+</section>
+
+    <!-- ========================================================
+         HOME SECTION
+    ======================================================== -->
+    <section class="section home-section" id="home">
+  <div class="home-inner">
+
+    <div class="home-text">
+      <p class="home-greeting reveal-text">Hello, World 👋</p>
+
+      <h1 class="home-name reveal-text">
+        Arpita<br /><span>Dey</span>
+      </h1>
+
+      <p class="home-tagline">
+        I'm a <span class="typewriter" id="typewriter"></span>
+      </p>
+
+      <p class="home-desc reveal-text">
+        I’m a passionate Full-Stack Developer specializing in MERN, Next.js, SQL, and Basic Java.
+        I love building responsive, user-friendly web applications and solving real-world problems through code.
+      </p>
+
+      <div class="home-cta">
+        <a href="#projects" class="btn btn--primary">View Projects</a>
+        <a href="/resume/Resume.pdf" class="btn btn--outline" download>Download Resume</a>
+      </div>
+
+      <div class="home-socials">
+        <a href="https://github.com/Arpita301" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/arpita-dey-b0b706344" target="_blank">
+          <i class="fab fa-linkedin"></i>
+        </a>
+    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=arpitadey2233@gmail.com" target="_blank">
+  <i class="fas fa-envelope"></i>
+</a>
+      </div>
+    </div>
+
+    <div class="home-photo-wrap">
+      <div class="home-photo-ring"></div>
+      <div class="home-photo-blob"></div>
+
+      <!-- 🔥 Replace with your image -->
+      <img src="/images/photo2.png" alt="Arpita Dey" class="home-photo" />
+
+      <!-- 💡 Better badges (realistic) -->
+      <div class="floating-badge badge-1">
+        <i class="fas fa-code"></i> MERN Developer
+      </div>
+      <div class="floating-badge badge-2">
+        <i class="fas fa-laptop-code"></i> 4+ Projects
+      </div>
+    </div>
+
+  </div>
+
+  <div class="scroll-hint" id="scrollHint">
+    <div class="scroll-mouse">
+      <div class="scroll-wheel"></div>
+    </div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+    <!-- ========================================================
+         ABOUT SECTION
+    ======================================================== -->
+<section class="section about-section" id="about">
+  <div class="section-header">
+    <h2 class="section-title"><span class="title-accent">About</span> Me</h2>
+    <p class="section-sub">A little about who I am</p>
+  </div>
+
+  <div class="about-grid">
+    
+    <!-- Profile Image -->
+    <div class="about-photo-wrap">
+      <img src="/images/photo2.png" alt="Arpita Dey" class="about-photo" />
+      <div class="about-photo-accent"></div>
+
+      <div class="about-tag tag-exp">
+        <strong>6 Months</strong><span>Internship</span>
+      </div>
+    </div>
+
+    <!-- About Text -->
+    <div class="about-text">
+      <h3>Full-Stack Developer (MERN) | Intern</h3>
+
+     <p>
+  Hi! I'm <strong>Arpita Dey</strong>, a Full-Stack Developer and BCA student who has been
+  working as a <strong>6-month intern</strong> at a startup, with my internship concluding
+  in May 2025 — after which I will be <strong>joining the company as a full-time team member</strong>.
+</p>
+
+<p>
+  During my internship, I contributed to live projects including <strong>PMS</strong> and
+  <strong>HRMS</strong>, focusing on frontend (UI/UX) development and improving user
+  experience. I've also worked on the frontend of <strong>Ghar Basai</strong>, applying
+  responsive design principles to build user-friendly interfaces.
+</p>
+
+<p>
+  Alongside my internship, I've built personal projects such as a <strong>Bank Management
+  System</strong>, <strong>Currency Converter</strong>, and <strong>Weather App</strong> —
+  each helping me strengthen my skills with the MERN stack and real-time application development.
+</p>
+
+      <!-- Personal Details -->
+      <div class="about-details">
+        <div class="detail-item">
+          <span class="detail-label">Name</span>
+          <span>Arpita Dey</span>
+        </div>
+
+        <div class="detail-item">
+          <span class="detail-label">Email</span>
+          <span>arpitadey2233@gmail.com</span>
+        </div>
+
+        <div class="detail-item">
+          <span class="detail-label">Location</span>
+          <span>West Bengal, India</span>
+        </div>
+
+        <!-- <div class="detail-item">
+          <span class="detail-label">Phone</span>
+          <span></span>
+        </div> -->
+
+        <div class="detail-item">
+          <span class="detail-label">Status</span>
+          <span class="available">Available for Full-Time ✓</span>
+        </div>
+
+        <div class="detail-item">
+          <span class="detail-label">Skills</span>
+          <span>Next js, Tailwind, MERN Stack, Basic DSA</span>
+        </div>
+      </div>
+
+      <a href="/resume/Resume.pdf" download class="btn btn--primary">Download CV</a>
+    </div>
+
+  </div>
+</section>
+
+    <!-- ========================================================
+         SKILLS SECTION
+    ======================================================== -->
+<section class="section skills-section" id="skills">
+  <div class="section-header">
+    <h2 class="section-title">My <span class="title-accent">Skills</span></h2>
+    <p class="section-sub">Technologies and tools I work with</p>
+  </div>
+
+  <div class="skills-tabs">
+    <button class="skill-tab active" data-tab="technical">Technical</button>
+    <button class="skill-tab" data-tab="design">Design</button>
+    <button class="skill-tab" data-tab="tools">Tools</button>
+    <button class="skill-tab" data-tab="soft">Soft Skills</button>
+  </div>
+
+  <!-- Technical Skills -->
+  <div class="skills-panel active" id="tab-technical">
+    <div class="skills-grid">
+      <div class="skill-bar-item">
+        <div class="skill-bar-header"><span>HTML / CSS</span><span>90%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="90"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-header"><span>JavaScript</span><span>75%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="75"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-header"><span>React</span><span>72%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="72"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-header"><span>Next.js</span><span>65%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="65"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-header"><span>Node.js / Express.js</span><span>68%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="68"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-header"><span>SQL</span><span>60%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="60"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-header"><span>Java (Basic + DSA)</span><span>55%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="55"></div></div>
+      </div>
+    </div>
+    <div class="tech-icons-row">
+      <div class="tech-icon-item"><i class="fab fa-html5"></i><span>HTML5</span></div>
+      <div class="tech-icon-item"><i class="fab fa-css3-alt"></i><span>CSS3</span></div>
+      <div class="tech-icon-item"><i class="fab fa-js"></i><span>JS</span></div>
+      <div class="tech-icon-item"><i class="fab fa-react"></i><span>React</span></div>
+      <div class="tech-icon-item"><i class="fab fa-node-js"></i><span>Node</span></div>
+      <div class="tech-icon-item"><i class="fab fa-java"></i><span>Java</span></div>
+    </div>
+  </div>
+
+  <!-- Design Skills -->
+  <div class="skills-panel" id="tab-design">
+    <div class="skills-grid">
+      <div class="skill-bar-item">
+        <div class="skill-bar-header"><span>Tailwind CSS</span><span>80%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-header"><span>Responsive Design</span><span>82%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="82"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-header"><span>UI/UX Basics</span><span>70%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="70"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tools -->
+  <div class="skills-panel" id="tab-tools">
+    <div class="skills-grid">
+      <div class="skill-bar-item">
+        <div class="skill-bar-header"><span>Git / GitHub</span><span>78%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="78"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-header"><span>VS Code</span><span>85%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Soft Skills -->
+  <div class="skills-panel" id="tab-soft">
+    <div class="soft-skills-grid">
+      <div class="soft-skill-card"><i class="fas fa-comments"></i><p>Communication</p></div>
+      <div class="soft-skill-card"><i class="fas fa-users"></i><p>Team Collaboration</p></div>
+      <div class="soft-skill-card"><i class="fas fa-lightbulb"></i><p>Problem Solving</p></div>
+      <div class="soft-skill-card"><i class="fas fa-clock"></i><p>Time Management</p></div>
+      <div class="soft-skill-card"><i class="fas fa-arrows-spin"></i><p>Adaptability</p></div>
+      <div class="soft-skill-card"><i class="fas fa-language"></i><p>English & Bengali</p></div>
+    </div>
+  </div>
+</section>
+
+    <!-- ========================================================
+         EXPERIENCE SECTION
+    ======================================================== -->
+   <section class="section experience-section" id="experience">
+  <div class="section-header">
+    <h2 class="section-title">Work <span class="title-accent">Experience</span></h2>
+    <p class="section-sub">Where I've worked and what I've done</p>
+  </div>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="timeline-header">
+          <div>
+            <h3>Full-Stack Developer Intern → Full-Time</h3>
+            <p class="timeline-company"><i class="fas fa-building"></i> Codex Private Limited</p>
+          </div>
+          <span class="timeline-date">Nov 2025 — Present</span>
+        </div>
+        <ul class="timeline-desc">
+          <li>Contributing to the frontend development of <strong>PMS & HRMS</strong> — a combined enterprise project managing project and HR operations used in production.</li>
+          <li>Worked on the frontend of <strong>Ghar Basai</strong>, a real estate platform, focusing on responsive design and user-friendly interfaces.</li>
+          <li>Built UI components using React and Tailwind CSS, ensuring clean and consistent design across both projects.</li>
+          <li>Collaborating with the team on backend integration and REST API consumption using Node.js and Express.js.</li>
+          <li>Successfully completing the 6-month internship and <strong>joining full-time from May 2026</strong>.</li>
+        </ul>
+        <div class="timeline-tags">
+          <span>React</span><span>Next.js</span><span>Node.js</span><span>Express.js</span><span>Tailwind CSS</span><span>Git</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+    <!-- ========================================================
+         PROJECTS SECTION
+    ======================================================== -->
+<section class="section projects-section" id="projects">
+  <div class="section-header">
+    <h2 class="section-title">Featured <span class="title-accent">Projects</span></h2>
+    <p class="section-sub">Things I've built that I'm proud of</p>
+  </div>
+
+  <div class="projects-filter">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="company">Company</button>
+    <button class="filter-btn" data-filter="web">Web App</button>
+    <button class="filter-btn" data-filter="java">Java</button>
+  </div>
+
+  <div class="projects-grid">
+
+    <!-- PMS & HRMS -->
+    <div class="project-card" data-cat="company">
+      <div class="project-image">
+        <!-- ✏️ REPLACE: Add your PMS & HRMS UI screenshot here -->
+        <img src="images/PMS&HRMS.jpeg" alt="PMS & HRMS" />
+        <div class="project-overlay">
+          <!-- No live link yet — still in development -->
+        </div>
+      </div>
+      <div class="project-info">
+        <span class="project-category">Company Project — Codex Private Limited</span>
+        <h3>PMS & HRMS</h3>
+        <p>A combined Project Management and HR Management System built during my internship at Codex Private Limited. I contribute to both the frontend and backend — building UI components and pages using Next.js and Tailwind CSS, and working on REST APIs using Node.js, Express.js, and SQL on the backend.</p>
+        <div class="project-tech">
+          <span>Next.js</span><span>Tailwind CSS</span><span>Node.js</span><span>Express.js</span><span>SQL</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ghar Basai -->
+    <div class="project-card" data-cat="company">
+      <div class="project-image">
+        <img src="images/ghar basai2.jpeg" alt="Ghar Basai" />
+        <div class="project-overlay">
+          <a href="https://ghar-basai.vercel.app" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+           <a href="https://github.com/Arpita301/ghar-basai" target="_blank" class="project-link"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+      <div class="project-info">
+        <span class="project-category">Company Project — Codex Private Limited</span>
+        <h3>Ghar Basai</h3>
+        <p>A real estate web platform built at Codex Private Limited. I handled the complete frontend — building responsive pages, clean UI layouts, and smooth navigation to help users browse properties easily.</p>
+        <div class="project-tech">
+          <span>Next.js</span><span>Tailwind CSS</span><span>Responsive Design</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Currency Converter -->
+    <div class="project-card" data-cat="web">
+      <div class="project-image">
+        <img src="images/currency.jpeg" alt="Currency Converter" />
+        <div class="project-overlay">
+          <a href="https://arpita301.github.io/Currency-Converter/" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+          <a href="https://github.com/arpita301/Currency-Converter" target="_blank" class="project-link"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+      <div class="project-info">
+        <span class="project-category">Web App</span>
+        <h3>Currency Converter</h3>
+        <p>A real-time currency converter that fetches live exchange rates via API and allows users to convert between multiple currencies instantly. Built using vanilla HTML, CSS, and JavaScript with a clean and minimal UI.</p>
+        <div class="project-tech">
+          <span>HTML</span><span>CSS</span><span>JavaScript</span><span>REST API</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Weather App -->
+    <div class="project-card" data-cat="web">
+      <div class="project-image">
+        <img src="images/weather.jpeg" alt="Weather App" />
+        <div class="project-overlay">
+          <a href="https://arpita301.github.io/Weather-map/" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+          <a href="https://github.com/arpita301/Weather-map" target="_blank" class="project-link"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+      <div class="project-info">
+        <span class="project-category">Web App</span>
+        <h3>Weather App</h3>
+        <p>A weather application that shows real-time weather data — temperature, humidity, wind speed, and conditions — for any searched city. Fetches live data from a weather API and presents it with a simple, responsive interface.</p>
+        <div class="project-tech">
+          <span>HTML</span><span>CSS</span><span>JavaScript</span><span>Weather API</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bank Management System -->
+    <div class="project-card" data-cat="java">
+      <div class="project-image">
+        <img src="images/bank.jpg" alt="Bank Management System" />
+        <div class="project-overlay">
+          <a href="https://github.com/arpita301" target="_blank" class="project-link"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+      <div class="project-info">
+        <span class="project-category">Java Project</span>
+        <h3>Bank Management System</h3>
+        <p>A console-based banking application built in Java using Object-Oriented Programming concepts. Supports core banking operations like account creation, deposit, withdrawal, balance check, and transaction history.</p>
+        <div class="project-tech">
+          <span>Java</span><span>OOP</span><span>DSA</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+    <!-- ========================================================
+         EDUCATION SECTION
+    ======================================================== -->
+   <section class="section education-section" id="education">
+  <div class="section-header">
+    <h2 class="section-title">My <span class="title-accent">Education</span></h2>
+    <p class="section-sub">Academic background and formal training</p>
+  </div>
+
+  <div class="education-grid">
+
+    <!-- 🎓 BCA -->
+    <div class="edu-card">
+      <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
+      <div class="edu-info">
+        <h3>Bachelor of Computer Applications (BCA)</h3>
+        <p class="edu-school">University of Burdwan</p>
+        <span class="edu-year">2022 — 2025</span>
+        <p class="edu-desc">
+          Currently pursuing BCA with focus on Web Development, MERN Stack, and Data Structures.
+          Current Score: 73.25%.
+        </p>
+      </div>
+    </div>
+
+    <!-- 🎓 Higher Secondary -->
+    <div class="edu-card">
+      <div class="edu-icon"><i class="fas fa-school"></i></div>
+      <div class="edu-info">
+        <h3>Higher Secondary (HS)</h3>
+        <p class="edu-school">Chinsurah Balika Bani Mandir, Hooghly</p>
+        <span class="edu-year">2020 — 2021</span>
+        <p class="edu-desc">
+          Completed higher secondary education.
+        </p>
+      </div>
+    </div>
+
+    <!-- 🎓 Madhyamik -->
+    <div class="edu-card">
+      <div class="edu-icon"><i class="fas fa-book"></i></div>
+      <div class="edu-info">
+        <h3>Madhyamik</h3>
+        <p class="edu-school">Chinsurah Balika Bani Mandir, Hooghly</p>
+        <span class="edu-year">2018 — 2019</span>
+        <p class="edu-desc">
+          Completed secondary education.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+    <!-- ========================================================
+         CERTIFICATES SECTION
+    ======================================================== -->
+<section class="section certificates-section" id="certificates">
+  <div class="section-header">
+    <h2 class="section-title">My <span class="title-accent">Certificates</span></h2>
+    <p class="section-sub">Verified credentials and accomplishments</p>
+  </div>
+
+  <div class="certs-grid">
+
+    <div class="cert-card" onclick="openCertModal('certificates/Certificate1.png','ChatGPT & AI Tools Workshop')">
+      <div class="cert-img-wrap">
+        <img src="certificates/Certificate1.png" alt="ChatGPT Workshop"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="cert-img-placeholder" style="display:none">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00e5b0" stroke-width="1.5">
+            <rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 12l2 2 4-4"/></svg>
+          <span>Certificate preview</span>
+        </div>
+      </div>
+      <div class="cert-body">
+        <div class="cert-top">
+          <span class="cert-issuer">be10x</span>
+          <span class="cert-year">2024</span>
+        </div>
+        <p class="cert-title">ChatGPT & AI Tools Workshop</p>
+        <p class="cert-desc">Hands-on workshop covering ChatGPT prompt engineering and modern AI productivity tools.</p>
+        <div class="cert-divider"></div>
+        <a href="certificates/Certificate1.png" target="_blank" class="cert-link" onclick="event.stopPropagation()">
+          <i class="fas fa-external-link-alt"></i> View Certificate
+        </a>
+      </div>
+    </div>
+
+    <div class="cert-card" onclick="openCertModal('certificates/Certificate2.png','DSA with Java Bootcamp')">
+      <div class="cert-img-wrap">
+        <img src="certificates/Certificate2.png" alt="DSA Certificate"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="cert-img-placeholder" style="display:none">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00e5b0" stroke-width="1.5">
+            <rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 12l2 2 4-4"/></svg>
+          <span>Certificate preview</span>
+        </div>
+      </div>
+      <div class="cert-body">
+        <div class="cert-top">
+          <span class="cert-issuer">LetsUpgrade</span>
+          <span class="cert-year">2024</span>
+        </div>
+        <p class="cert-title">DSA with Java Bootcamp</p>
+        <p class="cert-desc">Intensive bootcamp on Data Structures & Algorithms using Java — arrays, trees, graphs, and more.</p>
+        <div class="cert-divider"></div>
+        <a href="certificates/Certificate2.png" target="_blank" class="cert-link" onclick="event.stopPropagation()">
+          <i class="fas fa-external-link-alt"></i> View Certificate
+        </a>
+      </div>
+    </div>
+
+    <div class="cert-card" onclick="openCertModal('certificates/Certificate3.png','Business Intelligence using Power BI')">
+      <div class="cert-img-wrap">
+        <img src="certificates/Certificate3.png" alt="Power BI Certificate"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="cert-img-placeholder" style="display:none">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00e5b0" stroke-width="1.5">
+            <rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 12l2 2 4-4"/></svg>
+          <span>Certificate preview</span>
+        </div>
+      </div>
+      <div class="cert-body">
+        <div class="cert-top">
+          <span class="cert-issuer">Skill Nation</span>
+          <span class="cert-year">2024</span>
+        </div>
+        <p class="cert-title">Business Intelligence using Power BI</p>
+        <p class="cert-desc">Learned to build interactive dashboards, reports, and data models using Microsoft Power BI.</p>
+        <div class="cert-divider"></div>
+        <a href="certificates/Certificate3.png" target="_blank" class="cert-link" onclick="event.stopPropagation()">
+          <i class="fas fa-external-link-alt"></i> View Certificate
+        </a>
+      </div>
+    </div>
+
+    <div class="cert-card" onclick="openCertModal('certificates/certificate4.png','AI for Developers Workshop')">
+      <div class="cert-img-wrap">
+        <img src="certificates/certificate4.png" alt="AI Workshop"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="cert-img-placeholder" style="display:none">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00e5b0" stroke-width="1.5">
+            <rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 12l2 2 4-4"/></svg>
+          <span>Certificate preview</span>
+        </div>
+      </div>
+      <div class="cert-body">
+        <div class="cert-top">
+          <span class="cert-issuer">GUVI & HCL</span>
+          <span class="cert-year">2026</span>
+        </div>
+        <p class="cert-title">AI for Developers Workshop</p>
+        <p class="cert-desc">Explored AI-driven development tools, LLM APIs, and real-world use cases for developers.</p>
+        <div class="cert-divider"></div>
+        <a href="certificates/certificate4.png" target="_blank" class="cert-link" onclick="event.stopPropagation()">
+          <i class="fas fa-external-link-alt"></i> View Certificate
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Modal -->
+<div class="cert-modal-overlay" id="certModal" onclick="closeCertModal(event)">
+  <div class="cert-modal-box">
+    <button class="cert-modal-close" onclick="document.getElementById('certModal').classList.remove('active')">✕</button>
+    <img class="cert-modal-img" id="certModalImg" src="" alt="Certificate">
+    <div class="cert-modal-footer">
+      <span class="cert-modal-title" id="certModalTitle"></span>
+      <a id="certModalLink" href="#" target="_blank" class="cert-link" style="margin-top:0">
+        <i class="fas fa-external-link-alt"></i> Open full size
+      </a>
+    </div>
+  </div>
+</div>
+    <!-- ========================================================
+         LEARNING SECTION
+    ======================================================== -->
+    =<section class="section learning-section" id="learning">
+  <div class="section-header">
+    <h2 class="section-title">Currently <span class="title-accent">Learning</span></h2>
+    <p class="section-sub">What I'm exploring and improving right now</p>
+  </div>
+
+  <div class="learning-grid">
+
+    <!-- MERN Stack -->
+    <div class="learning-card">
+      <div class="learning-icon"><i class="fab fa-react"></i></div>
+      <div class="learning-info">
+        <h3>MERN Stack Development</h3>
+        <p>Building full-stack applications using MongoDB, Express, React, and Node.js.</p>
+        <div class="learning-progress">
+          <div class="lp-bar"><div class="lp-fill" data-width="60"></div></div>
+          <span>60%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <div class="learning-card">
+      <div class="learning-icon"><i class="fab fa-js"></i></div>
+      <div class="learning-info">
+        <h3>Advanced JavaScript</h3>
+        <p>Closures, Promises, Async/Await, Event Loop, and real-world problem solving.</p>
+        <div class="learning-progress">
+          <div class="lp-bar"><div class="lp-fill" data-width="45"></div></div>
+          <span>45%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Backend + JWT -->
+    <div class="learning-card">
+      <div class="learning-icon"><i class="fas fa-lock"></i></div>
+      <div class="learning-info">
+        <h3>Backend Authentication (JWT)</h3>
+        <p>Implementing secure authentication using Node.js, Express, JWT tokens, and middleware.</p>
+        <div class="learning-progress">
+          <div class="lp-bar"><div class="lp-fill" data-width="30"></div></div>
+          <span>30%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DSA -->
+    <div class="learning-card">
+      <div class="learning-icon"><i class="fas fa-code"></i></div>
+      <div class="learning-info">
+        <h3>Data Structures & Algorithms</h3>
+        <p>Solving problems using Java (Arrays, Strings, Recursion, Sorting).</p>
+        <div class="learning-progress">
+          <div class="lp-bar"><div class="lp-fill" data-width="20"></div></div>
+          <span>20%</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+    <!-- ========================================================
+         LIVE WORK SECTION
+    ======================================================== -->
+<section class="section livework-section" id="livework">
+  <div class="section-header">
+    <h2 class="section-title"><span class="title-accent">Live</span> Work</h2>
+    <p class="section-sub">Projects I'm currently building and improving</p>
+  </div>
+
+  <div class="live-grid">
+
+    <!-- PMS & HRMS Project -->
+    <div class="live-card">
+      <div class="live-status live-status--beta">
+        <span class="live-dot live-dot--yellow"></span> In Progress
+      </div>
+
+      <!-- 👉 Replace with your project screenshot -->
+      <img src="/images/PMS&HRMS.jpeg" alt="PMS HRMS Project" />
+
+      <div class="live-info">
+        <h3>PMS & HRMS System</h3>
+        <p>
+          A full-stack management system for handling projects, employees, and tasks 
+          using MERN stack. Includes authentication, dashboard, and role-based access.
+        </p>
+
+        <!-- 👉 If deployed -->
+        <a href="#" target="_blank" class="btn btn--outline btn--sm">
+          Coming Soon <i class="fas fa-clock"></i>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+    <!-- ========================================================
+         RESUME SECTION
+    ======================================================== -->
+  <section class="section resume-section" id="resume">
+  <div class="section-header">
+    <h2 class="section-title">My <span class="title-accent">Resume</span></h2>
+    <p class="section-sub">Download or view my full CV</p>
+  </div>
+
+  <div class="resume-box">
+    <!-- PDF Preview -->
+    <div class="resume-preview">
+      <img 
+        src="resume/resume.jpeg" 
+        alt="Resume preview" 
+        class="resume-img"
+        onerror="this.style.display='none'; document.getElementById('resume-fallback').style.display='flex';"
+      />
+      <div class="resume-placeholder" id="resume-fallback" style="display:none;">
+        <i class="fas fa-file-pdf"></i>
+        <p>Arpita__Dey_2025.pdf</p>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="resume-actions">
+      <a href="resume/Resume.pdf" download class="btn btn--primary">
+        <i class="fas fa-download"></i> Download CV
+      </a>
+  <a href="resume/Resume.pdf" target="_blank" class="btn btn--outline">
+  <i class="fas fa-eye"></i> View Online
+</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ========================================================
+     CONTACT SECTION
+======================================================== -->
+<section class="section contact-section" id="contact">
+  <form
+    class="contact-form"
+    id="contactForm"
+    action="https://api.web3forms.com/submit"
+    method="POST"
+  >
+    <input type="hidden" name="access_key" value="89062606-6fa3-490e-9e99-a17d9845c28b">
+    <input type="hidden" name="from_name" value="Portfolio Contact Form">
+    <input type="checkbox" name="botcheck" style="display:none;">
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" name="name" placeholder="Your name" required />
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" name="email" placeholder="your@email.com" required />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Subject</label>
+      <input type="text" name="subject" placeholder="Subject" />
+    </div>
+
+    <div class="form-group">
+      <label>Message</label>
+      <textarea name="message" rows="6" placeholder="Tell me about your project..." required></textarea>
+    </div>
+
+    <button type="submit" class="btn-send" id="submitBtn">
+      Send Message <i class="fas fa-paper-plane"></i>
+    </button>
+
+    <p class="form-success" id="formSuccess" style="display:none;">
+      ✓ Message sent! I'll get back to you soon.
+    </p>
+    <p class="form-error" id="formError" style="display:none;">
+      ✗ Something went wrong. Please try again.
+    </p>
+  </form>
+</section>
+
+    <!-- ============================================================
+         FOOTER
+    ============================================================ -->
+    <footer class="footer">
+      <!-- ✏️ CHANGE: Your name -->
+      <p>Crafted with <span class="heart">♥</span> by <strong>Alex Rivera</strong> · 2025</p>
+      <div class="footer-socials">
+        <a href="https://github.com/yourhandle" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/yourhandle" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://twitter.com/yourhandle" target="_blank"><i class="fab fa-twitter"></i></a>
+      </div>
+    </footer>
+
+  </main><!-- end main-content -->
+
+  <!-- Progress Bar -->
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <script src="script.js"></script>
+</body>
+</html>
