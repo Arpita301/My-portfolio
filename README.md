@@ -1,3 +1,4 @@
+<img width="1440" height="900" alt="image" src="https://github.com/user-attachments/assets/5f257371-8726-4de9-b151-112bc366d6ce" />
 Portfolio
 🚀 About the Project
 
