@@ -398,16 +398,17 @@ if (contactForm) {
 /* ============================================================
    13. SMOOTH SCROLL FOR ALL ANCHOR LINKS
    ============================================================ */
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-  link.addEventListener('click', (e) => {
-    const target = document.querySelector(link.getAttribute('href'));
-    if (target) {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+document.getElementById('scrollHint').addEventListener('click', () => {
+  const target = document.querySelector('#about'); // change ID
+  const navHeight = document.getElementById('navbar')?.offsetHeight || 72;
+
+  const targetTop = target.getBoundingClientRect().top + window.scrollY - navHeight;
+
+  window.scrollTo({
+    top: targetTop,
+    behavior: 'smooth'
   });
 });
-
 /* ============================================================
    14. PARALLAX EFFECT (subtle on hero)
    ============================================================ */
@@ -489,3 +490,4 @@ document.body.style.visibility = 'visible';
 console.log('%c Portfolio loaded! ✓', 'color: #00f5c4; font-size: 14px; font-weight: bold;');
 // ✏️ CHANGE: Personalize the console message
 console.log('%c Built by Alex Rivera — alex@example.com', 'color: #7b5cf5; font-size: 12px;');
+

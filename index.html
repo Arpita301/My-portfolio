@@ -10,6 +10,7 @@
   ============================================================ -->
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
 
@@ -22,58 +23,335 @@
   <!-- ============================================================
        LOADER
   ============================================================ -->
-  <div class="loader" id="loader">
+  <!-- <div class="loader" id="loader">
     <div class="loader-inner">
       <span class="loader-text">Loading</span>
       <div class="loader-bar"><div class="loader-fill"></div></div>
     </div>
+  </div> -->
+  <!-- ========================================================
+     LOADER - Coder Theme
+     Drop anywhere in your HTML.
+     Call showLoader() / hideLoader() from JS,
+     or it auto-hides 2.6s after window load.
+======================================================== -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap">
+
+<div class="loader" id="loader">
+  <div class="loader-inner">
+
+    <!-- code tags row -->
+ <div class="loader-tags">
+  <span class="ltag" style="--d:0s">DOM</span>
+  <span class="ltag" style="--d:0.35s">CSSOM</span>
+  <span class="ltag" style="--d:0.7s">JS Engine</span>
+</div>
+
+    <!-- dual-ring spinner -->
+    <div class="loader-spinner">
+      <div class="sp-ring"></div>
+      <div class="sp-arc"></div>
+      <div class="sp-arc sp-arc--inner"></div>
+      <div class="sp-dot"></div>
+    </div>
+
+    <!-- status + progress bar -->
+    <div class="loader-meta">
+      <div class="loader-status">
+        <span class="ls-dot"></span>
+        <span class="loader-text" id="loaderText">Initializing...</span>
+      </div>
+      <div class="loader-bar">
+        <div class="loader-fill" id="loaderFill"></div>
+        <div class="loader-shine"></div>
+      </div>
+      <div class="loader-pct" id="loaderPct">0%</div>
+      <div class="loader-codelines">
+        <div class="cl" style="--w:65%;--d:0s"></div>
+        <div class="cl" style="--w:45%;--d:0.15s"></div>
+        <div class="cl" style="--w:78%;--d:0.30s"></div>
+        <div class="cl" style="--w:38%;--d:0.45s"></div>
+      </div>
+    </div>
+
   </div>
+</div>
+
+<style>
+  /* ── FULLSCREEN OVERLAY ── */
+  .loader {
+    position: fixed;
+    inset: 0;
+    background: #0a0e1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+  }
+  .loader.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  /* ── INNER ── */
+  .loader-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.8rem;
+    width: 260px;
+  }
+
+  /* ── CODE TAGS ── */
+  .loader-tags { display: flex; gap: 0.5rem; }
+  .ltag {
+    font-family: 'Syne Mono', monospace;
+    font-size: 0.65rem;
+    padding: 3px 10px;
+    border-radius: 5px;
+    border: 1px solid #1e293b;
+    color: #334155;
+    animation: tagPulse 2s ease-in-out infinite;
+    animation-delay: var(--d);
+  }
+  @keyframes tagPulse {
+    0%, 100% { border-color: #1e293b; color: #334155; background: transparent; }
+    50%       { border-color: rgba(0,212,170,0.35); color: #00d4aa; background: rgba(0,212,170,0.07); }
+  }
+
+  /* ── SPINNER ── */
+  .loader-spinner { width: 56px; height: 56px; position: relative; }
+  .sp-ring {
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    border: 1.5px solid #1e293b;
+  }
+  .sp-arc {
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: #00d4aa;
+    animation: spin 1s linear infinite;
+  }
+  .sp-arc--inner {
+    inset: 7px;
+    border-top-color: #5b8dee;
+    animation-duration: 1.5s;
+    animation-direction: reverse;
+  }
+  .sp-dot {
+    position: absolute; top: 50%; left: 50%;
+    width: 6px; height: 6px;
+    background: #00d4aa; border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: dotPulse 1s ease-in-out infinite;
+  }
+  @keyframes spin     { to { transform: rotate(360deg); } }
+  @keyframes dotPulse {
+    0%, 100% { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+    50%      { opacity: 0.3; transform: translate(-50%,-50%) scale(0.5); }
+  }
+
+  /* ── META BLOCK ── */
+  .loader-meta {
+    display: flex; flex-direction: column;
+    align-items: center; gap: 0.6rem; width: 100%;
+  }
+
+  /* status line */
+  .loader-status { display: flex; align-items: center; gap: 0.5rem; }
+  .ls-dot {
+    width: 6px; height: 6px;
+    background: #00d4aa; border-radius: 50%;
+    animation: dotPulse 1s ease-in-out infinite;
+  }
+  .loader-text {
+    font-family: 'Syne Mono', monospace;
+    font-size: 0.72rem; color: #00d4aa; letter-spacing: 0.08em;
+  }
+
+  /* progress bar */
+  .loader-bar {
+    width: 100%; height: 3px;
+    background: #111827; border-radius: 999px;
+    overflow: hidden; position: relative;
+  }
+  .loader-fill {
+    height: 100%; width: 0%;
+    background: #00d4aa; border-radius: 999px;
+    transition: width 0.15s ease;
+  }
+  .loader-shine {
+    position: absolute; top: 0; left: -50%;
+    width: 50%; height: 100%;
+    background: rgba(255,255,255,0.28);
+    animation: shine 1.8s ease-in-out infinite;
+  }
+  @keyframes shine { to { left: 110%; } }
+
+  /* percentage */
+  .loader-pct {
+    font-family: 'Syne Mono', monospace;
+    font-size: 0.68rem; color: #475569;
+    width: 100%; text-align: right;
+  }
+
+  /* skeleton lines */
+  .loader-codelines {
+    width: 100%; display: flex;
+    flex-direction: column; gap: 6px; margin-top: 0.2rem;
+  }
+  .cl {
+    height: 2px; width: var(--w);
+    background: #111827; border-radius: 2px;
+    animation: clPulse 1.6s ease-in-out infinite;
+    animation-delay: var(--d);
+  }
+  @keyframes clPulse {
+    0%, 100% { background: #111827; }
+    50%      { background: #1e293b; }
+  }
+</style>
+
+<script>
+ (function () {
+  const msgs = [
+    'Initializing...',
+    'Loading assets...',
+    'Building DOM...',
+    'Almost ready...',
+    'Complete!'
+  ];
+
+  const fillEl = document.getElementById('loaderFill');
+  const textEl = document.getElementById('loaderText');
+  const pctEl  = document.getElementById('loaderPct');
+  const loader = document.getElementById('loader');
+
+  let pct = 0;
+  let step = 0;
+
+  function updateStep(targetPct, message, delay) {
+    return new Promise((resolve) => {
+      textEl.textContent = message;
+
+      const interval = setInterval(() => {
+        if (pct >= targetPct) {
+          clearInterval(interval);
+          setTimeout(resolve, delay); // wait before next step
+        } else {
+          pct += 1; // slow + smooth increment
+          fillEl.style.width = pct + '%';
+          pctEl.textContent = pct + '%';
+        }
+      }, 40); // speed control (increase for slower)
+    });
+  }
+
+  async function startLoader() {
+    await updateStep(20, msgs[0], 400);
+    await updateStep(40, msgs[1], 500);
+    await updateStep(65, msgs[2], 600);
+    await updateStep(85, msgs[3], 700);
+    await updateStep(100, msgs[4], 500);
+
+    hideLoader();
+  }
+
+  /* auto start */
+  window.addEventListener('load', () => {
+    startLoader();
+  });
+
+  /* manual controls */
+  window.showLoader = function () {
+    pct = 0;
+    fillEl.style.width = '0%';
+    pctEl.textContent = '0%';
+    loader.classList.remove('hidden');
+    startLoader();
+  };
+
+  window.hideLoader = function () {
+    loader.classList.add('hidden');
+  };
+})();
+</script>
 
   <!-- ============================================================
        NAVIGATION
   ============================================================ -->
-  <nav class="navbar" id="navbar">
-    <div class="nav-logo">
-      <!-- ✏️ CHANGE: Your initials or logo text -->
-      <span class="logo-text">AD<span class="logo-dot">.</span></span>
-    </div>
+ <nav class="navbar" id="navbar">
 
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#home" class="nav-link active" data-section="home"><span class="nav-num">01</span>Home</a></li>
-      <li><a href="#about" class="nav-link" data-section="about"><span class="nav-num">02</span>About</a></li>
-      <li><a href="#skills" class="nav-link" data-section="skills"><span class="nav-num">03</span>Skills</a></li>
-      <li><a href="#experience" class="nav-link" data-section="experience"><span class="nav-num">04</span>Experience</a></li>
-      <li><a href="#projects" class="nav-link" data-section="projects"><span class="nav-num">05</span>Projects</a></li>
-      <li><a href="#education" class="nav-link" data-section="education"><span class="nav-num">06</span>Education</a></li>
-      <li><a href="#certificates" class="nav-link" data-section="certificates"><span class="nav-num">07</span>Certificates</a></li>
-      <li><a href="#learning" class="nav-link" data-section="learning"><span class="nav-num">08</span>Learning</a></li>
-      <li><a href="#livework" class="nav-link" data-section="livework"><span class="nav-num">09</span>Live Work</a></li>
-      <li><a href="#resume" class="nav-link" data-section="resume"><span class="nav-num">10</span>Resume</a></li>
-      <li><a href="#contact" class="nav-link" data-section="contact"><span class="nav-num">11</span>Contact</a></li>
-    </ul>
+<!-- LOGO → links to Dashboard -->
+<a href="#dashboard" class="nav-logo" style="text-decoration:none; display:flex; align-items:center; gap:10px;">
+  <!-- <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="18,2 33,10 33,26 18,34 3,26 3,10" fill="#0a0f1a" stroke="#00ffb4" stroke-width="1.8"/>
+    <text x="18" y="23" text-anchor="middle" font-family="'Segoe UI', sans-serif"
+          font-weight="800" font-size="11" fill="#00ffb4" letter-spacing="0.5">AD</text>
+  </svg> -->
+<span class="logo-text">
+  &lt;Arpita<span class="logo-accent">/&gt;</span>
+</span>
+</a>
+  <!-- NAV LINKS — no numbers, hidden on mobile -->
+  <!-- <ul class="nav-links" id="navLinks">
+    <li><a href="#home"         class="nav-link active" data-section="home">Home</a></li>
+    <li><a href="#about"        class="nav-link" data-section="about">About</a></li>
+    <li><a href="#skills"       class="nav-link" data-section="skills">Skills</a></li>
+    <li><a href="#experience"   class="nav-link" data-section="experience">Experience</a></li>
+    <li><a href="#projects"     class="nav-link" data-section="projects">Projects</a></li>
+    <li><a href="#education"    class="nav-link" data-section="education">Education</a></li>
+    <li><a href="#certificates" class="nav-link" data-section="certificates">Certificates</a></li>
+    <li><a href="#learning"     class="nav-link" data-section="learning">Learning</a></li>
+    <li><a href="#livework"     class="nav-link" data-section="livework">Live Work</a></li>
+    <li><a href="#resume"       class="nav-link" data-section="resume">Resume</a></li>
+    <li><a href="#contact"      class="nav-link" data-section="contact">Contact</a></li>
+  </ul> -->
 
-    <div class="nav-actions">
-      <!-- Theme Toggle -->
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-        <span class="toggle-track">
-          <span class="toggle-thumb">
-            <i class="fas fa-sun sun-icon"></i>
-            <i class="fas fa-moon moon-icon"></i>
-          </span>
+  <div class="nav-actions">
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <span class="toggle-track">
+        <span class="toggle-thumb">
+          <i class="fas fa-sun sun-icon"></i>
+          <i class="fas fa-moon moon-icon"></i>
         </span>
-      </button>
+      </span>
+    </button>
 
-      <!-- Unique Hamburger -->
-      <button class="hamburger" id="hamburger" aria-label="Menu">
-        <div class="ham-box">
-          <span class="ham-line line-1"></span>
-          <span class="ham-line line-2"></span>
-          <span class="ham-line line-3"></span>
-          <span class="ham-label">MENU</span>
-        </div>
-      </button>
-    </div>
-  </nav>
+    <!-- Hire Me button — desktop only -->
+    <a href="#contact" class="hire-me-btn" style="
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 20px;
+      background: linear-gradient(135deg, #00ffb4, #00c8d4);
+      color: #0a0f1a;
+      font-weight: 700;
+      font-size: 13px;
+      border-radius: 8px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 0 16px rgba(0,255,180,0.25);
+      transition: all 0.2s;
+    ">HIRE ME →</a>
+
+    <!-- Hamburger — MOBILE ONLY (hidden on desktop via CSS) -->
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <div class="ham-box">
+        <span class="ham-line line-1"></span>
+        <span class="ham-line line-2"></span>
+        <span class="ham-line line-3"></span>
+        <span class="ham-label">MENU</span>
+      </div>
+    </button>
+  </div>
+
+</nav>
 
   <!-- ============================================================
        MOBILE MENU OVERLAY
@@ -118,23 +396,7 @@
       <div class="online-badge"><span class="dot-pulse"></span> Available for work</div>
     </div>
 
-    <div class="sidebar-stats">
-      <!-- ✏️ CHANGE: Your stats -->
-     <div class="stat-item">
-    <span class="stat-num" data-target="4">0</span>
-    <span class="stat-label">Projects</span>
-  </div>
 
-  <div class="stat-item">
-    <span class="stat-num" data-target="1">0</span>
-    <span class="stat-label">Years Exp.</span>
-  </div>
-
-  <div class="stat-item">
-    <span class="stat-num" data-target="4">0</span>
-    <span class="stat-label">Certifications</span>
-  </div>
-    </div>
 
     <div class="sidebar-nav">
       <a href="#dashboard" class="dash-nav-item active"><i class="fas fa-th-large"></i><span>Dashboard</span></a>
@@ -171,7 +433,8 @@
 <section class="section dashboard-section" id="dashboard">
   <div class="section-header">
     <h2 class="section-title"><span class="title-accent">Dashboard</span></h2>
-    <p class="section-sub">Your at-a-glance portfolio overview</p>
+    <p class="section-sub">Showcasing my skills, projects, and journey</p>
+     <div class="online-badge"><span class="dot-pulse"></span> Available for work</div>
   </div>
 
   <div class="dashboard-grid">
@@ -249,7 +512,7 @@
   <div class="home-inner">
 
     <div class="home-text">
-      <p class="home-greeting reveal-text">Hello, World 👋</p>
+      <p class="home-greeting reveal-text">Hello, I'm 👋</p>
 
       <h1 class="home-name reveal-text">
         Arpita<br /><span>Dey</span>
@@ -300,12 +563,12 @@
 
   </div>
 
-  <div class="scroll-hint" id="scrollHint">
-    <div class="scroll-mouse">
-      <div class="scroll-wheel"></div>
-    </div>
-    <span>Scroll</span>
+<a href="#about" class="scroll-hint" id="scrollHint">
+  <div class="scroll-mouse">
+    <div class="scroll-wheel"></div>
   </div>
+  <span>Scroll</span>
+</a>
 </section>
 
     <!-- ========================================================
@@ -391,109 +654,178 @@
   </div>
 </section>
 
-    <!-- ========================================================
-         SKILLS SECTION
-    ======================================================== -->
+ <!-- ========================================================
+     SKILLS SECTION - Premium Redesign
+======================================================== -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- ========================================================
+     SKILLS SECTION - Mobile Optimized (Dark Theme)
+======================================================== -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- ========================================================
+     SKILLS SECTION - Responsive + Light/Dark Mode
+======================================================== -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <section class="section skills-section" id="skills">
-  <div class="section-header">
-    <h2 class="section-title">My <span class="title-accent">Skills</span></h2>
-    <p class="section-sub">Technologies and tools I work with</p>
-  </div>
 
-  <div class="skills-tabs">
-    <button class="skill-tab active" data-tab="technical">Technical</button>
-    <button class="skill-tab" data-tab="design">Design</button>
-    <button class="skill-tab" data-tab="tools">Tools</button>
-    <button class="skill-tab" data-tab="soft">Soft Skills</button>
-  </div>
 
-  <!-- Technical Skills -->
-  <div class="skills-panel active" id="tab-technical">
-    <div class="skills-grid">
-      <div class="skill-bar-item">
-        <div class="skill-bar-header"><span>HTML / CSS</span><span>90%</span></div>
-        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="90"></div></div>
+  <div class="sk-inner">
+
+    <div class="sk-head">
+      <h2 class="sk-title">My <span>Skills</span></h2>
+      <p class="sk-sub">Technologies &amp; tools I work with</p>
+    </div>
+
+    <div class="sk-tabs">
+      <button class="sk-tab active" onclick="switchSkillTab('technical', this)">Technical</button>
+      <button class="sk-tab" onclick="switchSkillTab('design', this)">Design</button>
+      <button class="sk-tab" onclick="switchSkillTab('tools', this)">Tools</button>
+      <button class="sk-tab" onclick="switchSkillTab('soft', this)">Soft Skills</button>
+    </div>
+
+    <!-- ── TECHNICAL ── -->
+    <div class="sk-panel active" id="tab-technical">
+
+      <div class="tech-group">
+        <div class="group-label">Frontend</div>
+        <div class="tag-row">
+          <div class="stag"><span class="adot green"></span> HTML / CSS <span class="lvl">Advanced</span></div>
+          <div class="stag"><span class="adot green"></span> JavaScript <span class="lvl">Proficient</span></div>
+          <div class="stag"><span class="adot blue"></span> React <span class="lvl">Proficient</span></div>
+          <div class="stag"><span class="adot blue"></span> Next.js <span class="lvl">Intermediate</span></div>
+        </div>
       </div>
-      <div class="skill-bar-item">
-        <div class="skill-bar-header"><span>JavaScript</span><span>75%</span></div>
-        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="75"></div></div>
+
+      <div class="tech-group">
+        <div class="group-label">Backend &amp; Database</div>
+        <div class="tag-row">
+          <div class="stag"><span class="adot blue"></span> Node.js / Express.js <span class="lvl">Intermediate</span></div>
+          <div class="stag"><span class="adot purple"></span> SQL <span class="lvl">Intermediate</span></div>
+          <div class="stag"><span class="adot purple"></span> Java + DSA <span class="lvl">Familiar</span></div>
+        </div>
       </div>
-      <div class="skill-bar-item">
-        <div class="skill-bar-header"><span>React</span><span>72%</span></div>
-        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="72"></div></div>
+
+      <div class="sk-divider"></div>
+
+      <div class="icon-grid">
+        <div class="ibadge"><i class="fab fa-html5" style="color:#e34f26"></i><span>HTML5</span></div>
+        <div class="ibadge"><i class="fab fa-css3-alt" style="color:#1572b6"></i><span>CSS3</span></div>
+        <div class="ibadge"><i class="fab fa-js" style="color:#f7df1e"></i><span>JS</span></div>
+        <div class="ibadge"><i class="fab fa-react" style="color:#61dbfb"></i><span>React</span></div>
+        <div class="ibadge"><i class="fab fa-node-js" style="color:#68a063"></i><span>Node</span></div>
+        <div class="ibadge"><i class="fab fa-java" style="color:#007396"></i><span>Java</span></div>
       </div>
-      <div class="skill-bar-item">
-        <div class="skill-bar-header"><span>Next.js</span><span>65%</span></div>
-        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="65"></div></div>
-      </div>
-      <div class="skill-bar-item">
-        <div class="skill-bar-header"><span>Node.js / Express.js</span><span>68%</span></div>
-        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="68"></div></div>
-      </div>
-      <div class="skill-bar-item">
-        <div class="skill-bar-header"><span>SQL</span><span>60%</span></div>
-        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="60"></div></div>
-      </div>
-      <div class="skill-bar-item">
-        <div class="skill-bar-header"><span>Java (Basic + DSA)</span><span>55%</span></div>
-        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="55"></div></div>
+
+    </div>
+
+    <!-- ── DESIGN ── -->
+    <div class="sk-panel" id="tab-design">
+      <div class="design-grid">
+        <div class="dcard">
+          <div class="dcard-icon"><i class="fas fa-wind"></i></div>
+          <div class="dcard-name">Tailwind CSS</div>
+          <div class="dtags">
+            <span class="dtag">Utility-first</span>
+            <span class="dtag">Responsive</span>
+          </div>
+        </div>
+        <div class="dcard">
+          <div class="dcard-icon"><i class="fas fa-mobile-screen"></i></div>
+          <div class="dcard-name">Responsive Design</div>
+          <div class="dtags">
+            <span class="dtag">Mobile-first</span>
+            <span class="dtag">Flexbox</span>
+            <span class="dtag">Grid</span>
+          </div>
+        </div>
+        <div class="dcard">
+          <div class="dcard-icon"><i class="fas fa-pencil-ruler"></i></div>
+          <div class="dcard-name">UI / UX Basics</div>
+          <div class="dtags">
+            <span class="dtag">Wireframing</span>
+            <span class="dtag">Figma</span>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="tech-icons-row">
-      <div class="tech-icon-item"><i class="fab fa-html5"></i><span>HTML5</span></div>
-      <div class="tech-icon-item"><i class="fab fa-css3-alt"></i><span>CSS3</span></div>
-      <div class="tech-icon-item"><i class="fab fa-js"></i><span>JS</span></div>
-      <div class="tech-icon-item"><i class="fab fa-react"></i><span>React</span></div>
-      <div class="tech-icon-item"><i class="fab fa-node-js"></i><span>Node</span></div>
-      <div class="tech-icon-item"><i class="fab fa-java"></i><span>Java</span></div>
-    </div>
-  </div>
 
-  <!-- Design Skills -->
-  <div class="skills-panel" id="tab-design">
-    <div class="skills-grid">
-      <div class="skill-bar-item">
-        <div class="skill-bar-header"><span>Tailwind CSS</span><span>80%</span></div>
-        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div>
-      </div>
-      <div class="skill-bar-item">
-        <div class="skill-bar-header"><span>Responsive Design</span><span>82%</span></div>
-        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="82"></div></div>
-      </div>
-      <div class="skill-bar-item">
-        <div class="skill-bar-header"><span>UI/UX Basics</span><span>70%</span></div>
-        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="70"></div></div>
+    <!-- ── TOOLS ── -->
+    <div class="sk-panel" id="tab-tools">
+      <div class="tools-list">
+        <div class="tool-row">
+          <div class="tool-ico git"><i class="fab fa-git-alt"></i></div>
+          <div style="flex: 1;">
+            <div class="tool-name">Git / GitHub</div>
+            <div class="tool-desc">Version control &amp; collaboration</div>
+            <div class="tool-pills">
+              <span class="tpill">Branching</span>
+              <span class="tpill">PRs</span>
+              <span class="tpill">CI/CD</span>
+            </div>
+          </div>
+        </div>
+        <div class="tool-row">
+          <div class="tool-ico vs"><i class="fas fa-code"></i></div>
+          <div style="flex: 1;">
+            <div class="tool-name">VS Code</div>
+            <div class="tool-desc">Primary development environment</div>
+            <div class="tool-pills">
+              <span class="tpill">Extensions</span>
+              <span class="tpill">Debugging</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Tools -->
-  <div class="skills-panel" id="tab-tools">
-    <div class="skills-grid">
-      <div class="skill-bar-item">
-        <div class="skill-bar-header"><span>Git / GitHub</span><span>78%</span></div>
-        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="78"></div></div>
-      </div>
-      <div class="skill-bar-item">
-        <div class="skill-bar-header"><span>VS Code</span><span>85%</span></div>
-        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div>
+    <!-- ── SOFT SKILLS ── -->
+    <div class="sk-panel" id="tab-soft">
+      <div class="soft-grid">
+        <div class="soft-card">
+          <div class="soft-icon"><i class="fas fa-comments"></i></div>
+          <p>Communication</p>
+        </div>
+        <div class="soft-card">
+          <div class="soft-icon"><i class="fas fa-users"></i></div>
+          <p>Team Collaboration</p>
+        </div>
+        <div class="soft-card">
+          <div class="soft-icon"><i class="fas fa-lightbulb"></i></div>
+          <p>Problem Solving</p>
+        </div>
+        <div class="soft-card">
+          <div class="soft-icon"><i class="fas fa-clock"></i></div>
+          <p>Time Management</p>
+        </div>
+        <div class="soft-card">
+          <div class="soft-icon"><i class="fas fa-rotate"></i></div>
+          <p>Adaptability</p>
+        </div>
+        <div class="soft-card">
+          <div class="soft-icon"><i class="fas fa-language"></i></div>
+          <p>English &amp; Bengali</p>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Soft Skills -->
-  <div class="skills-panel" id="tab-soft">
-    <div class="soft-skills-grid">
-      <div class="soft-skill-card"><i class="fas fa-comments"></i><p>Communication</p></div>
-      <div class="soft-skill-card"><i class="fas fa-users"></i><p>Team Collaboration</p></div>
-      <div class="soft-skill-card"><i class="fas fa-lightbulb"></i><p>Problem Solving</p></div>
-      <div class="soft-skill-card"><i class="fas fa-clock"></i><p>Time Management</p></div>
-      <div class="soft-skill-card"><i class="fas fa-arrows-spin"></i><p>Adaptability</p></div>
-      <div class="soft-skill-card"><i class="fas fa-language"></i><p>English & Bengali</p></div>
-    </div>
-  </div>
+  </div><!-- /sk-inner -->
+
+  <script>
+    function switchSkillTab(id, btn) {
+      document.querySelectorAll('.sk-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.sk-tab').forEach(b => b.classList.remove('active'));
+      document.getElementById('tab-' + id).classList.add('active');
+      btn.classList.add('active');
+    }
+  </script>
+
 </section>
-
     <!-- ========================================================
          EXPERIENCE SECTION
     ======================================================== -->
@@ -644,62 +976,125 @@
   </div>
 </section>
 
-    <!-- ========================================================
-         EDUCATION SECTION
-    ======================================================== -->
-   <section class="section education-section" id="education">
-  <div class="section-header">
-    <h2 class="section-title">My <span class="title-accent">Education</span></h2>
-    <p class="section-sub">Academic background and formal training</p>
+<!-- ========================================================
+     EDUCATION SECTION - Timeline Design
+======================================================== -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<section class="section education-section" id="education">
+
+ 
+
+  <div class="ed-inner">
+
+    <div class="section-header">
+      <h2 class="ed-title">My <span>Education</span></h2>
+      <p class="ed-sub">Academic background &amp; formal training</p>
+    </div>
+
+    <div class="timeline">
+
+      <!-- BCA (latest → top) -->
+      <div class="tl-item">
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div class="tl-card">
+          <div class="tl-top">
+            <div class="tl-icon-wrap"><i class="fas fa-graduation-cap"></i></div>
+            <span class="tl-badge"><span class="badge-dot"></span> Completed</span>
+          </div>
+          <h3 class="tl-degree">Bachelor of Computer Applications (BCA)</h3>
+          <p class="tl-school"><i class="fas fa-building-columns"></i> University of Burdwan</p>
+          <div class="tl-meta">
+            <span class="tl-year"><i class="far fa-calendar"></i> 2022 — 2025</span>
+            <span class="tl-score">73.25%</span>
+          </div>
+          <p class="tl-desc">Completed BCA with focus on Web Development, MERN Stack, and Data Structures &amp; Algorithms.</p>
+        </div>
+      </div>
+
+      <!-- Higher Secondary -->
+      <div class="tl-item">
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div class="tl-card">
+          <div class="tl-top">
+            <div class="tl-icon-wrap"><i class="fas fa-school"></i></div>
+            <span class="tl-badge"><span class="badge-dot"></span> Completed</span>
+          </div>
+          <h3 class="tl-degree">Higher Secondary (HS)</h3>
+          <p class="tl-school"><i class="fas fa-location-dot"></i> Chinsurah Balika Bani Mandir, Hooghly</p>
+          <div class="tl-meta">
+            <span class="tl-year"><i class="far fa-calendar"></i> 2020 — 2021</span>
+          </div>
+          <p class="tl-desc">Completed higher secondary education with strong academic performance.</p>
+        </div>
+      </div>
+
+      <!-- Madhyamik (oldest → bottom) -->
+      <div class="tl-item">
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div class="tl-card">
+          <div class="tl-top">
+            <div class="tl-icon-wrap"><i class="fas fa-book-open"></i></div>
+            <span class="tl-badge"><span class="badge-dot"></span> Completed</span>
+          </div>
+          <h3 class="tl-degree">Madhyamik</h3>
+          <p class="tl-school"><i class="fas fa-location-dot"></i> Chinsurah Balika Bani Mandir, Hooghly</p>
+          <div class="tl-meta">
+            <span class="tl-year"><i class="far fa-calendar"></i> 2018 — 2019</span>
+          </div>
+          <p class="tl-desc">Completed secondary education with a strong academic foundation.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── BOTTOM STEP DOTS ── -->
+    <div class="tl-steps">
+      <div class="step-node">
+        <div class="step-dot s1"></div>
+        <span class="step-label">BCA</span>
+      </div>
+      <div class="step-line l1"></div>
+      <div class="step-node">
+        <div class="step-dot s2"></div>
+        <span class="step-label">Higher Secondary</span>
+      </div>
+      <div class="step-line l2"></div>
+      <div class="step-node">
+        <div class="step-dot s3"></div>
+        <span class="step-label">Madhyamik</span>
+      </div>
+    </div>
+
   </div>
 
-  <div class="education-grid">
-
-    <!-- 🎓 BCA -->
-    <div class="edu-card">
-      <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
-      <div class="edu-info">
-        <h3>Bachelor of Computer Applications (BCA)</h3>
-        <p class="edu-school">University of Burdwan</p>
-        <span class="edu-year">2022 — 2025</span>
-        <p class="edu-desc">
-          Currently pursuing BCA with focus on Web Development, MERN Stack, and Data Structures.
-          Current Score: 73.25%.
-        </p>
-      </div>
-    </div>
-
-    <!-- 🎓 Higher Secondary -->
-    <div class="edu-card">
-      <div class="edu-icon"><i class="fas fa-school"></i></div>
-      <div class="edu-info">
-        <h3>Higher Secondary (HS)</h3>
-        <p class="edu-school">Chinsurah Balika Bani Mandir, Hooghly</p>
-        <span class="edu-year">2020 — 2021</span>
-        <p class="edu-desc">
-          Completed higher secondary education.
-        </p>
-      </div>
-    </div>
-
-    <!-- 🎓 Madhyamik -->
-    <div class="edu-card">
-      <div class="edu-icon"><i class="fas fa-book"></i></div>
-      <div class="edu-info">
-        <h3>Madhyamik</h3>
-        <p class="edu-school">Chinsurah Balika Bani Mandir, Hooghly</p>
-        <span class="edu-year">2018 — 2019</span>
-        <p class="edu-desc">
-          Completed secondary education.
-        </p>
-      </div>
-    </div>
-
-  </div>
 </section>
     <!-- ========================================================
          CERTIFICATES SECTION
     ======================================================== -->
+<!-- ========================================================
+     CERTIFICATES SECTION - with Modal Lightbox
+======================================================== -->
+
+
+<!-- Modal -->
+<div class="cert-modal-overlay" id="certModal" onclick="closeCertModal(event)">
+  <div class="cert-modal-box">
+    <button class="cert-modal-close" onclick="closeCertModalDirect()">&times;</button>
+    <p class="cert-modal-title" id="certModalTitle"></p>
+    <div class="cert-modal-img-wrap">
+      <img id="certModalImg" src="" alt="Certificate">
+    </div>
+    <div class="cert-modal-footer">
+      <a id="certModalLink" href="#" target="_blank" class="cert-modal-open-btn">
+        <i class="fas fa-external-link-alt"></i> Open Full Size
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Section -->
 <section class="section certificates-section" id="certificates">
   <div class="section-header">
     <h2 class="section-title">My <span class="title-accent">Certificates</span></h2>
@@ -708,7 +1103,7 @@
 
   <div class="certs-grid">
 
-    <div class="cert-card" onclick="openCertModal('certificates/Certificate1.png','ChatGPT & AI Tools Workshop')">
+    <div class="cert-card">
       <div class="cert-img-wrap">
         <img src="certificates/Certificate1.png" alt="ChatGPT Workshop"
           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -723,16 +1118,16 @@
           <span class="cert-issuer">be10x</span>
           <span class="cert-year">2024</span>
         </div>
-        <p class="cert-title">ChatGPT & AI Tools Workshop</p>
+        <p class="cert-title">ChatGPT &amp; AI Tools Workshop</p>
         <p class="cert-desc">Hands-on workshop covering ChatGPT prompt engineering and modern AI productivity tools.</p>
         <div class="cert-divider"></div>
-        <a href="certificates/Certificate1.png" target="_blank" class="cert-link" onclick="event.stopPropagation()">
+        <a href="#" class="cert-link" onclick="openCertModal('certificates/Certificate1.png','ChatGPT & AI Tools Workshop'); return false;">
           <i class="fas fa-external-link-alt"></i> View Certificate
         </a>
       </div>
     </div>
 
-    <div class="cert-card" onclick="openCertModal('certificates/Certificate2.png','DSA with Java Bootcamp')">
+    <div class="cert-card">
       <div class="cert-img-wrap">
         <img src="certificates/Certificate2.png" alt="DSA Certificate"
           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -748,15 +1143,15 @@
           <span class="cert-year">2024</span>
         </div>
         <p class="cert-title">DSA with Java Bootcamp</p>
-        <p class="cert-desc">Intensive bootcamp on Data Structures & Algorithms using Java — arrays, trees, graphs, and more.</p>
+        <p class="cert-desc">Intensive bootcamp on Data Structures &amp; Algorithms using Java — arrays, trees, graphs, and more.</p>
         <div class="cert-divider"></div>
-        <a href="certificates/Certificate2.png" target="_blank" class="cert-link" onclick="event.stopPropagation()">
+        <a href="#" class="cert-link" onclick="openCertModal('certificates/Certificate2.png','DSA with Java Bootcamp'); return false;">
           <i class="fas fa-external-link-alt"></i> View Certificate
         </a>
       </div>
     </div>
 
-    <div class="cert-card" onclick="openCertModal('certificates/Certificate3.png','Business Intelligence using Power BI')">
+    <div class="cert-card">
       <div class="cert-img-wrap">
         <img src="certificates/Certificate3.png" alt="Power BI Certificate"
           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -774,13 +1169,13 @@
         <p class="cert-title">Business Intelligence using Power BI</p>
         <p class="cert-desc">Learned to build interactive dashboards, reports, and data models using Microsoft Power BI.</p>
         <div class="cert-divider"></div>
-        <a href="certificates/Certificate3.png" target="_blank" class="cert-link" onclick="event.stopPropagation()">
+        <a href="#" class="cert-link" onclick="openCertModal('certificates/Certificate3.png','Business Intelligence using Power BI'); return false;">
           <i class="fas fa-external-link-alt"></i> View Certificate
         </a>
       </div>
     </div>
 
-    <div class="cert-card" onclick="openCertModal('certificates/certificate4.png','AI for Developers Workshop')">
+    <div class="cert-card">
       <div class="cert-img-wrap">
         <img src="certificates/certificate4.png" alt="AI Workshop"
           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -792,13 +1187,13 @@
       </div>
       <div class="cert-body">
         <div class="cert-top">
-          <span class="cert-issuer">GUVI & HCL</span>
+          <span class="cert-issuer">GUVI &amp; HCL</span>
           <span class="cert-year">2026</span>
         </div>
         <p class="cert-title">AI for Developers Workshop</p>
         <p class="cert-desc">Explored AI-driven development tools, LLM APIs, and real-world use cases for developers.</p>
         <div class="cert-divider"></div>
-        <a href="certificates/certificate4.png" target="_blank" class="cert-link" onclick="event.stopPropagation()">
+        <a href="#" class="cert-link" onclick="openCertModal('certificates/certificate4.png','AI for Developers Workshop'); return false;">
           <i class="fas fa-external-link-alt"></i> View Certificate
         </a>
       </div>
@@ -806,6 +1201,31 @@
 
   </div>
 </section>
+
+<script>
+  function openCertModal(src, title) {
+    document.getElementById('certModalImg').src = src;
+    document.getElementById('certModalTitle').textContent = title;
+    document.getElementById('certModalLink').href = src;
+    document.getElementById('certModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCertModalDirect() {
+    document.getElementById('certModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function closeCertModal(e) {
+    if (e.target === document.getElementById('certModal')) {
+      closeCertModalDirect();
+    }
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeCertModalDirect();
+  });
+</script>
 
 <!-- Modal -->
 <div class="cert-modal-overlay" id="certModal" onclick="closeCertModal(event)">
@@ -1012,11 +1432,10 @@
     ============================================================ -->
     <footer class="footer">
       <!-- ✏️ CHANGE: Your name -->
-      <p>Crafted with <span class="heart">♥</span> by <strong>Alex Rivera</strong> · 2025</p>
+      <p>Crafted with <span class="heart">♥</span> by <strong>Arpita Dey</strong> · 2026</p>
       <div class="footer-socials">
-        <a href="https://github.com/yourhandle" target="_blank"><i class="fab fa-github"></i></a>
-        <a href="https://linkedin.com/in/yourhandle" target="_blank"><i class="fab fa-linkedin"></i></a>
-        <a href="https://twitter.com/yourhandle" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://github.com/Arpita301" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/arpita-dey-b0b706344/" target="_blank"><i class="fab fa-linkedin"></i></a>
       </div>
     </footer>
 
