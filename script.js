@@ -149,10 +149,6 @@ mobileOverlay.addEventListener('click', (e) => {
   }
 });
 
-/* ============================================================
-   6. TYPEWRITER EFFECT
-   ============================================================ */
-// ✏️ CHANGE: Your roles / phrases for the typewriter
 const phrases = [
   'Full-Stack Developer',
   'UI/UX Designer',
@@ -161,36 +157,40 @@ const phrases = [
   'Creative Technologist',
 ];
 
-let phraseIndex  = 0;
-let charIndex    = 0;
-let isDeleting   = false;
+let phraseIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+
 const typeTarget = document.getElementById('typewriter');
 
 function typeWrite() {
   if (!typeTarget) return;
+
   const current = phrases[phraseIndex];
 
   if (isDeleting) {
-    typeTarget.textContent = current.substring(0, charIndex--);
+    charIndex--;
   } else {
-    typeTarget.textContent = current.substring(0, charIndex++);
+    charIndex++;
   }
 
-  let speed = isDeleting ? 50 : 100;
+  typeTarget.textContent = current.substring(0, charIndex);
 
-  if (!isDeleting && charIndex > current.length) {
-    speed = 1800; // Pause at end
+  let speed = isDeleting ? 70 : 120;
+
+  if (!isDeleting && charIndex === current.length) {
     isDeleting = true;
-  } else if (isDeleting && charIndex < 0) {
-    isDeleting  = false;
+    speed = 1500; // pause at full text
+  } else if (isDeleting && charIndex === 0) {
+    isDeleting = false;
     phraseIndex = (phraseIndex + 1) % phrases.length;
-    charIndex   = 0;
     speed = 400;
   }
 
   setTimeout(typeWrite, speed);
 }
-setTimeout(typeWrite, 2200); // Start after loader
+
+setTimeout(typeWrite, 800);
 
 /* ============================================================
    7. COUNTERS (animated number increment)
@@ -490,4 +490,6 @@ document.body.style.visibility = 'visible';
 console.log('%c Portfolio loaded! ✓', 'color: #00f5c4; font-size: 14px; font-weight: bold;');
 // ✏️ CHANGE: Personalize the console message
 console.log('%c Built by Alex Rivera — alex@example.com', 'color: #7b5cf5; font-size: 12px;');
+
+
 
